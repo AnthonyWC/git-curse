@@ -11,7 +11,7 @@ while True:
 	opener.addheaders = headers
 
 	try:
-		req = opener.open("https://api.github.com/events?client_id=7263b8ecab24f4b9aa2d&client_secret=eb9ac06e62d4538417a1d3b9b7b56a775584b95b")
+		req = opener.open("https://api.github.com/events?client_id={}&client_secret={}".format(oauth['github_id'], oauth['github_secret']))
 		headers = [("If-Modified-Since", req.info()["Last-Modified"]), ("User-Agent", "GitCurse Bot")]
 		out = json.loads(req.read().decode("UTF-8"))
 
