@@ -3,16 +3,18 @@ from hashlib import sha1
 from json import load
 
 def percentEncode(toEncode):
+	toEncode = toEncode.encode("UTF-8")
 	okay = string.ascii_letters + string.digits + "-._~"
+	okay = okay.encode("UTF-8")
 	out = ""
 	for char in toEncode:
 		if not char in okay:
-			hexVal = hex(ord(char))[2:].upper()
+			hexVal = hex(char)[2:].upper()
 			while len(hexVal) < 2:
-				hexVal = "0" + hexVal
-			out += "%" + hexVal
+				hexVal = "0" + str(hexVal)
+			out += "%" + str(hexVal)
 		else:
-			out += char
+			out += chr(char)
 	return out
 
 def createNonce():
@@ -78,6 +80,7 @@ def postStatus(status, consumer_secret, consumer_key, token_secret, access_token
 
 	auth_string = createAuthString(oauth_parameters)
 	post_data = bytes("status=" + percentEncode(info_parameters["status"]), "UTF-8")
+	print(post_data)
 
 	req = urllib.request.Request("https://api.twitter.com/1.1/statuses/update.json?include_entities=true", data=post_data, headers={"Authorization":auth_string})
 	urllib.request.urlopen(req)
