@@ -1,5 +1,9 @@
-import urllib.request, urllib.error, json, re
-import twitter_status
+import urllib.request, urllib.error, json, re, sys
+import twitter_status, log
+
+debug = False
+if("-d" in sys.argv):
+	debug = True
 
 regexPattern = "(fuck|bitch|shit|asshole|damn|wtf)"
 oauth = json.load(open("keys.json"))
@@ -21,7 +25,9 @@ while True:
 				for commit in event['payload']['commits']:
 					if(re.search(regexPattern, commit['message'], re.IGNORECASE)):
 						url = commit['url'].replace("api.", "").replace("/repos", "").replace("commits", "commit")
-						twitter_status.postStatus(commit['message'] + '\n' +  url, oauth["consumer_secret"], oauth["consumer_key"], oauth["token_secret"], oauth["access_token"])
+						twitter_status.postStatus(commit['message'] + '\n' +  url, oauth["consumer_secret"], oauth["consumer_key"], oauth["token_secret"], oauth["access_token"], debug)
 
 	except urllib.error.HTTPError as e:
+		if(e.code != 304 and debug):
+			log.log("info.log", "[gitcurse.py] HTTPError: {}".format(e.code))
 		continue

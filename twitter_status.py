@@ -1,6 +1,7 @@
 import string, base64, re, time, random, hmac, binascii, os, urllib.request
 from hashlib import sha1
 from json import load
+import log
 
 def percentEncode(toEncode):
 	toEncode = toEncode.encode("UTF-8")
@@ -55,7 +56,7 @@ def createAuthString(parameters):
 
 	return auth_string
 
-def postStatus(status, consumer_secret, consumer_key, token_secret, access_token):
+def postStatus(status, consumer_secret, consumer_key, token_secret, access_token, debug=False):
 	http_method = "POST"
 	base_url = "https://api.twitter.com/1.1/statuses/update.json"
 
@@ -80,7 +81,8 @@ def postStatus(status, consumer_secret, consumer_key, token_secret, access_token
 
 	auth_string = createAuthString(oauth_parameters)
 	post_data = bytes("status=" + percentEncode(info_parameters["status"]), "UTF-8")
-	print(post_data)
+	if debug:
+		log.log("info.log", "[twitter_status.py]  Status Posted: " + str(post_data))
 
 	req = urllib.request.Request("https://api.twitter.com/1.1/statuses/update.json?include_entities=true", data=post_data, headers={"Authorization":auth_string})
 	urllib.request.urlopen(req)
