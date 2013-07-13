@@ -1,7 +1,7 @@
 git-curse
 =========
 
-A Twitter bot built with Python that posts GitHub commits containing profanity.
+A Twitter bot built with Python that posts GitHub commits containing profanity. Follow it @GitCurse on Twitter!
 
 The bot only needs Python 3 standard library modules to work.
 
