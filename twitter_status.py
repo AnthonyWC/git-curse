@@ -81,8 +81,9 @@ def postStatus(status, consumer_secret, consumer_key, token_secret, access_token
 
 	auth_string = createAuthString(oauth_parameters)
 	post_data = bytes("status=" + percentEncode(info_parameters["status"]), "UTF-8")
-	if debug:
-		log.log("info.log", "[twitter_status.py]  Status Posted: " + str(post_data))
 
 	req = urllib.request.Request("https://api.twitter.com/1.1/statuses/update.json?include_entities=true", data=post_data, headers={"Authorization":auth_string})
 	urllib.request.urlopen(req)
+
+	if debug:
+		log.log("info.log", "[twitter_status.py]  Status Posted: " + status)
