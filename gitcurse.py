@@ -25,7 +25,7 @@ while True:
 				for commit in event['payload']['commits']:
 					if(re.search(regexPattern, commit['message'], re.IGNORECASE)):
 						url = commit['url'].replace("api.", "").replace("/repos", "").replace("commits", "commit")
-						twitter_status.postStatus(commit['message'] + '\n' +  url, oauth["consumer_secret"], oauth["consumer_key"], oauth["token_secret"], oauth["access_token"], debug)
+						twitter_status.postStatus('"' + commit['message'] + '"' + '\n' +  url, oauth["consumer_secret"], oauth["consumer_key"], oauth["token_secret"], oauth["access_token"], debug)
 
 	except urllib.error.HTTPError as e:
 		if(e.code != 304 and debug):
