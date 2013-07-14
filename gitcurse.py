@@ -5,7 +5,7 @@ debug = False
 if("-d" in sys.argv):
 	debug = True
 
-regexPattern = "(fuck|bitch|shit|damn|wtf|boob|butt|ass|titty|vagina|penis)"
+regexPattern = "(fuck|bitch|shit|damn|wtf|boob|butt|titty|vagina|penis)"
 oauth = json.load(open("keys.json"))
 mostRecent = 0
 headers = [("User-Agent", "GitCurse Bot")]
