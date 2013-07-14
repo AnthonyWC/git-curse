@@ -1,4 +1,4 @@
-import urllib.request, urllib.error, json, re, sys
+import urllib.request, urllib.error, json, re, sys, time
 import twitter_status, log
 
 debug = False
@@ -30,4 +30,7 @@ while True:
 	except urllib.error.HTTPError as e:
 		if(e.code != 304 and debug):
 			log.log("info.log", "[gitcurse.py] HTTPError: {}".format(e.code))
-		continue
+	except Exception as e:
+		log.log("info.log", "[gitcurse.py] Exception: {}".format(str(e))
+
+	time.sleep(1)
