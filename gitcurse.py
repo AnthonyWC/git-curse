@@ -30,6 +30,9 @@ while True:
 	except urllib.error.HTTPError as e:
 		if(e.code != 304 and debug):
 			log.log("info.log", "[gitcurse.py] HTTPError: {}".format(e.code))
+	except KeyboardInterrupt as e:
+		log.log("info.log", "[gitcurse.py] Exit")
+		sys.exit(0)
 	except Exception as e:
 		log.log("info.log", "[gitcurse.py] Exception: {}".format(str(e)))
 
