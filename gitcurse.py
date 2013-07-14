@@ -31,6 +31,6 @@ while True:
 		if(e.code != 304 and debug):
 			log.log("info.log", "[gitcurse.py] HTTPError: {}".format(e.code))
 	except Exception as e:
-		log.log("info.log", "[gitcurse.py] Exception: {}".format(str(e))
+		log.log("info.log", "[gitcurse.py] Exception: {}".format(str(e)))
 
 	time.sleep(1)
