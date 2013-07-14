@@ -33,7 +33,7 @@ while True:
 	except KeyboardInterrupt as e:
 		log.log("info.log", "[gitcurse.py] Exit")
 		sys.exit(0)
-	except Exception as e:
-		log.log("info.log", "[gitcurse.py] Exception: {}".format(str(e)))
+	except:
+		log.log("info.log", "[gitcurse.py] Exception: {}".format(sys.exc_info()[1]))
 
 	time.sleep(1)
